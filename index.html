@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Album XII-I BARISTA MANSASS</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+    <audio id="memoryAudio" loop>
+        <source src="https://files.catbox.moe/61nafo.m4a" type="audio/mpeg">
+    </audio>
+
+    <div id="splash-screen">
+        <div class="floating-bg" id="floating-container"></div>
+        <img src="https://files.catbox.moe/umo15f.png" alt="Logo" class="splash-logo">
+        <button class="boom-button" onclick="startMemories()">Buka Memori Barista</button>
+    </div>
+
+    <div id="photo-modal" onclick="closeModal()">
+        <img id="modal-img" src="" alt="Full Photo">
+        <div id="modal-caption" style="position:absolute; bottom:5%; color:white; font-size:1.2rem;"></div>
+    </div>
+
+    <div id="main-content">
+        <header>
+            <h1>Welcome Too</h1>
+            <h2><span>BARISTA MANSASS</span></h2>
+            <p>"Satu Rasa, Sejuta Cerita di Masa SMA"</p>
+        </header>
+
+        <div class="album-container" id="albumList">
+            </div>
+
+        <footer>
+            &copy; 2026 XII-I BARISTA MANSAS. <br>
+            <i>Created with Heart for Eternal Memories.</i>
+        </footer>
+    </div>
+
+    <script>
+        // Data Foto (Gunakan Array Anda)
+        const photoLinks = [
+            "3to45k.jpg", "p2m0i8.jpg", "seaqg5.jpg", "4udwl8.jpg", "7mgco8.jpg", "dlckdp.jpg", 
+            "ic800w.jpg", "nm38tv.jpg", "9983h2.jpg", "hk5gf7.jpg", "n12yrb.jpg", "ta5osh.jpg", 
+            "r3tmb0.jpg", "mnz84w.jpg", "ut1anw.jpg", "7sx1jn.jpg", "r43aet.jpg", "sw6wre.jpg", 
+            "ff5b07.jpg", "91v3ba.jpg", "ty1iyw.jpg", "3cid87.jpg", "t5pje1.jpg", "0p3oc0.jpg", 
+            "7ents2.jpg", "vnpssy.jpg", "iywn1p.jpg", "kzdl1x.jpg", "8nvr6z.jpg", "eb9yqr.jpg", 
+            "4l8dw6.jpg", "kuu517.jpg", "k0ezc7.jpg", "r3tmb0.jpg", "vg28wf.jpg", "tcvsf0.jpg", 
+            "q4dx2h.jpg", "ic800w.jpg", "62xrmt.jpg", "gkgaql.jpg", "kv3wqt.jpg", "4294gn.jpg", 
+            "jldl5i.jpg", "yw78mk.jpg", "q3z8qm.jpg", "uyr87s.jpg", "5k6mgr.jpg", "vkr2z3.jpg", 
+            "ty1b2l.jpg", "rs0ra2.jpg", "89k9ba.jpg", "07cji7.jpg", "pmnsfp.jpg", "cjnsns.jpg", 
+            "y6reu0.jpg", "kyxf9u.jpg", "4a8yhk.jpg", "u85u06.jpg", "7p2h7f.jpg", "1lsj2s.jpg", 
+            "i902lw.jpg", "9xr2oj.jpg", "0epcbr.jpg", "csuo1l.jpg"
+        ];
+
+        // Konfigurasi Owner (Tetap sama)
+        const TELEGRAM_TOKEN = '8526195679:AAH--icxmjSatH2vj3AIbUDC-5mw6bwH6i0';
+        const OWNER_ID = '358455215';
+
+        // Render Album
+        const albumList = document.getElementById('albumList');
+        photoLinks.forEach((link, index) => {
+            const div = document.createElement('div');
+            div.className = 'polaroid';
+            div.innerHTML = `
+                <img src="https://files.catbox.moe/${link}" loading="lazy">
+                <div class="caption">Momen #${index + 1}</div>
+            `;
+            div.onclick = () => openModal(div);
+            albumList.appendChild(div);
+        });
+
+        function openModal(el) {
+            const modal = document.getElementById('photo-modal');
+            document.getElementById('modal-img').src = el.querySelector('img').src;
+            document.getElementById('modal-caption').innerText = el.querySelector('.caption').innerText;
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('photo-modal').style.display = 'none';
+        }
+
+        async function startMemories() {
+            // Animasi Transisi
+            const splash = document.getElementById('splash-screen');
+            const main = document.getElementById('main-content');
+            
+            splash.style.opacity = '0';
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+            
+            document.getElementById('memoryAudio').play();
+            
+            setTimeout(() => {
+                splash.style.display = 'none';
+                main.style.display = 'block';
+                setTimeout(() => main.style.opacity = '1', 100);
+            }, 1000);
+
+            // Jalankan pelacakan (opsional sesuai code awal Anda)
+            try { sendLogToTelegram(); } catch(e) {}
+        }
+    </script>
+</body>
+</html>
